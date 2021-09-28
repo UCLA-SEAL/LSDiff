@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="edu.utexas.lsclipse"
+      label="LSdiff for Eclipse"
+      version="0.9.3.96"
+      provider-name="University of Texas at Austin">
+
+   <description url="http://www.cs.utexas.edu/~alexloh/lsdiff">
+      Tool implementation of Logical Structure Diff for Eclipse.
+
+Visit http://www.cs.utexas.edu/~alexloh/lsdiff for more information.
+   </description>
+
+   <copyright url="http://www.example.com/copyright">
+      This software is copyrighted as noted below. It may be freely
+copied and redistributed, provided that the copyright notice
+is preserved on all copies.
+
+There is no warranty or other guarantee of fitness for this software,
+it is provided solely &quot;as is&quot;. Bug reports or fixes may be sent
+to the author, who may or may not act on them as he desires.
+   </copyright>
+
+   <license url="http://www.example.com/license">
+      THE SOFTWARE IS PROVIDED &quot;AS IS&quot;, WITHOUT WARRANTY OF ANY KIND,
+EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
+OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+
+IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION
+OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION
+WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+   </license>
+
+   <url>
+      <update label="LSdiff Update Site" url="http://userweb.cs.utexas.edu/~alexloh/lsdiff/update/"/>
+   </url>
+
+   <plugin
+         id="edu.utexas.lsclipse"
+         download-size="0"
+         install-size="0"
+         version="0.9.3.96"
+         unpack="false"/>
+
+</feature>

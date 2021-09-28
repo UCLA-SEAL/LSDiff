@@ -1,0 +1,123 @@
+#include "2KB_lsdPred.rub"
+
+after_extends(?t, ?t2) :- added_extends(?t, ?t2) ; ( before_extends(?t, ?t2) , NOT (deleted_extends(?t, ?t2)) ).
+after_method(?m, ?ms, ?t) :- added_method(?m, ?ms, ?t) ; ( before_method(?m, ?ms, ?t) , NOT (deleted_method(?m, ?ms, ?t)) ).
+after_field(?m, ?ms, ?t) :- added_field(?m, ?ms, ?t) ; ( before_field(?m, ?ms, ?t) , NOT (deleted_field(?m, ?ms, ?t)) ).
+
+
+//Inherited methods for added method
+//Propagate inherited method downwards
+added_inheritedmethod(?ms, ?t, ?t2) :- 
+		added_method(?, ?ms, ?t) ,
+		after_extends(?t, ?t2).
+//Break existing inheritance from ancestor
+deleted_inheritedmethod(?ms, ?t, ?t3) :- 
+		added_method(?, ?ms, ?t3) ,
+		before_inheritedmethod(?ms, ?t, ?t3).
+
+
+//Inherited methods for deleted method
+//Delete inherited method downwards
+deleted_inheritedmethod(?ms, ?t, ?t2) :- 
+		deleted_method(?, ?ms, ?t) ,
+		before_extends(?t, ?t2).
+//Reinstate existing inheritance from parent
+added_inheritedmethod(?ms, ?t, ?t3) :- 
+		deleted_method(?, ?ms, ?t3) ,
+		after_extends(?t, ?t3) ,
+		before_method(?, ?ms, ?t).
+//Reinstate existing inheritance from ancestor
+added_inheritedmethod(?ms, ?t, ?t3) :- 
+		deleted_method(?, ?ms, ?t3) ,
+		after_extends(?t2, ?t3) ,
+		before_inheritedmethod(?ms, ?t, ?t2).
+
+
+//Inherited fields for added field
+//Propagate inherited field downwards
+added_inheritedfield(?ms, ?t, ?t2) :- 
+		added_field(?, ?ms, ?t) ,
+		after_extends(?t, ?t2).
+//Break existing inheritance from ancestor
+deleted_inheritedfield(?ms, ?t, ?t3) :- 
+		added_field(?, ?ms, ?t3) ,
+		before_inheritedfield(?ms, ?t, ?t3).
+
+
+//Inherited fields for deleted field
+//Delete inherited field downwards
+deleted_inheritedfield(?ms, ?t, ?t2) :- 
+		deleted_field(?, ?ms, ?t) ,
+		before_extends(?t, ?t2).
+//Reinstate existing inheritance from parent
+added_inheritedfield(?ms, ?t, ?t3) :- 
+		deleted_field(?, ?ms, ?t3) ,
+		after_extends(?t, ?t3) ,
+		before_field(?, ?ms, ?t).
+//Reinstate existing inheritance from ancestor
+added_inheritedfield(?ms, ?t, ?t3) :- 
+		deleted_field(?, ?ms, ?t3) ,
+		after_extends(?t2, ?t3) ,
+		before_inheritedfield(?ms, ?t, ?t2).
+
+
+//Added extends
+//Inherited methods for added method
+//Propagate inherited method downwards
+added_inheritedmethod(?ms, ?t, ?t2) :- 
+		added_extends(?t, ?t2) ,
+		after_method(?, ?ms, ?t).
+//Inherited fields for added field
+//Propagate inherited field downwards
+added_inheritedfield(?ms, ?t, ?t2) :- 
+		added_extends(?t, ?t2) ,
+		after_field(?, ?ms, ?t).
+
+//Delete extends
+//Inherited methods for deleted method
+//Delete inherited method from parent
+deleted_inheritedmethod(?ms, ?t, ?t2) :- 
+		before_method(?, ?ms, ?t) ,
+		deleted_extends(?t, ?t2).
+//Delete inherited method downwards
+deleted_inheritedmethod(?ms, ?t, ?t3) :- 
+		before_inheritedmethod(?ms, ?t, ?t3) ,
+		deleted_extends(?t2, ?t3).
+//Delete extends
+//Inherited fields for deleted field
+//Delete inherited field from parent
+deleted_inheritedfield(?ms, ?t, ?t2) :- 
+		before_field(?, ?ms, ?t) ,
+		deleted_extends(?t, ?t2).
+//Delete inherited field downwards
+deleted_inheritedfield(?ms, ?t, ?t3) :- 
+		before_inheritedfield(?ms, ?t, ?t3) ,
+		deleted_extends(?t2, ?t3).
+
+
+//Helper functions
+
+//Propagate add_inherited downwards
+added_inheritedmethod(?ms, ?t, ?t3) :- 
+		added_inheritedmethod(?ms, ?t, ?t2) ,
+		after_extends(?t2, ?t3) ,
+		NOT(after_method(?, ?ms, ?t3)).
+
+//Propagate del_inherited downwards
+deleted_inheritedmethod(?ms, ?t, ?t3) :- 
+		deleted_inheritedmethod(?ms, ?t, ?t2) ,
+		before_extends(?t2, ?t3) ,
+		NOT(before_method(?, ?ms, ?t3)).
+
+//Propagate add_inherited downwards
+added_inheritedfield(?ms, ?t, ?t3) :- 
+		added_inheritedfield(?ms, ?t, ?t2) ,
+		after_extends(?t2, ?t3) ,
+		NOT(after_field(?, ?ms, ?t3)).
+
+//Propagate del_inherited downwards
+deleted_inheritedfield(?ms, ?t, ?t3) :- 
+		deleted_inheritedfield(?ms, ?t, ?t2) ,
+		before_extends(?t2, ?t3) ,
+		NOT(before_field(?, ?ms, ?t3)).
+

@@ -1,0 +1,89 @@
+//TYPE Package AS String
+//TYPE String AS String 
+//TYPE String AS String
+//TYPE String AS String
+
+
+package :: String
+MODES
+  (F) IS NONDET
+END
+
+type :: String, String, String
+MODES
+  (F,F,F) IS NONDET
+END
+
+field :: String, String, String
+MODES
+  (F,F,F) IS NONDET
+END
+
+method :: String, String, String
+MODES
+  (F,F,F) IS NONDET
+END
+
+
+return :: String, String
+MODES
+  (F,F) IS NONDET
+  (B,F) IS SEMIDET
+  (F,B) IS NONDET
+END
+
+extends :: String, String
+MODES
+  (F,F) IS NONDET
+  (B,F) IS NONDET
+  (F,B) IS NONDET
+END
+
+implements :: String, String
+MODES
+  (F,F) IS NONDET
+  (B,F) IS NONDET
+  (F,B) IS NONDET
+END
+
+accesses :: String, String
+MODES
+  (F,F) IS NONDET
+  (B,F) IS NONDET
+  (F,B) IS NONDET
+END
+
+calls :: String, String
+MODES
+  (F,F) IS NONDET
+  (B,F) IS NONDET
+  (F,B) IS NONDET
+END
+
+fieldoftype ::String, String
+MODES
+  (F,F) IS NONDET
+  (B,F) IS SEMIDET
+  (F,B) IS NONDET
+END
+
+typeintype :: String, String
+MODES
+  (F,F) IS NONDET
+  (B,F) IS SEMIDET
+  (F,B) IS NONDET
+END
+
+inheritedmethod :: String, String, String
+MODES
+  (F,F,F) IS NONDET
+END
+
+inheritedfield :: String, String, String
+MODES
+  (F,F,F) IS NONDET
+END
+
+
+
+

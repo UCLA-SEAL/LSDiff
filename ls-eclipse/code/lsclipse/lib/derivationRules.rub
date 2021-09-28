@@ -1,0 +1,21 @@
+
+//Derivation rules for inherited members
+inheritedmethod(?ms, ?t, ?t2) :- 
+		method(?, ?ms, ?t) ,
+		extends(?t, ?t2) ,
+		NOT(method(?, ?ms, ?t2)).
+inheritedmethod(?ms, ?t, ?t3) :- 
+		inheritedmethod(?ms, ?t, ?t2) ,
+		extends(?t2, ?t3) ,
+		NOT(method(?, ?ms, ?t3)).
+
+//Derivation rules for fields
+inheritedfield(?ms, ?t, ?t2) :- 
+		field(?, ?ms, ?t) ,
+		extends(?t, ?t2) ,
+		NOT(field(?, ?ms, ?t2)).
+inheritedfield(?ms, ?t, ?t3) :- 
+		inheritedfield(?ms, ?t, ?t2) ,
+		extends(?t2, ?t3) ,
+		NOT(field(?, ?ms, ?t3)).
+
